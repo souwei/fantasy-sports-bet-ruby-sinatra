@@ -1,5 +1,23 @@
-<% if logged_in? %>
-Welcome!
-<% else %>
-Not Logged in!
-<% end %>
+<div class="row">
+  <div class="col-md-12" style="border:1px solid black;">
+    <% if !logged_in?%>
+    Please login to view details about your account and bets
+    <% else %>
+      <h1 class="col-md-12">Your Account Details</h1>
+      <h2 class="col-md-12">Your Current Bets</h2>
+      <% if current_user.bets.exists? %>
+        <p class="col-md-12">
+          Gambler!
+        <p>
+      <% else %>
+        <p class="col-md-12">
+          You currently do not have any live bets.
+        <p>
+      <% end %>
+      <h2 class="col-md-12"> Your Bet History</h2>
+      <p class="col-md-12">
+        You have not placed any bets with Fantasy Sports Bet.
+      <p>
+    <% end %>
+  </div>
+</div>

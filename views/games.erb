@@ -1,8 +1,37 @@
 <div class="row">
    <div class="col-md-12" style="border:1px solid black;">
-     Test content
-   </div>
-   <% if !logged_in? %>
-   Not Logged In
+   <h1>Today's Games</h1>
+
+   <div class="col-md-8">
+   <% Game.all.each do |game| %>
+   <table class="game_item table table-hover">
+     <thead>
+       <tr>
+         <th colspan="2"class="game_item_heading"><%= "#{game.description} [#{game.away_team}\
+         @ #{game.home_team}] " %>
+         </th>
+       </tr>
+       <tr>
+         <th>Team</th><th>Odds</th>
+       </tr>
+     </thead>
+   <tr class='clickable-row' data-href="/games/<%=game["id"]%>?picked_team=<%=game.home_team%>&id=<%=game["id"]%>">
+       <td class="game_item_team"><%= game.home_team %></td>
+       <td class="game_item_odds"><%= game.home_odds %></td>
+   </tr>
+   <tr class='clickable-row' data-href="/games/<%=game["id"]%>?picked_team=<%=game.away_team%>&id=<%=game["id"]%>">
+       <td class="game_item_team"><%= game.away_team %></td>
+       <td class="game_item_odds"><%= game.away_odds %></td>
+   </tr>
    <% end %>
+   <hr>
+   </div>
+ </div>
 </div>
+<script>
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>

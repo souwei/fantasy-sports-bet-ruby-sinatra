@@ -1,0 +1,17 @@
+
+/*.games_item_heading{
+  width:100%;
+}*/
+
+.game_item{
+  width:70%;
+  border:1px solid black;
+}
+
+.game_item_team{
+  width:85%;
+}
+
+.game_item_odds{
+  width:15%;
+}

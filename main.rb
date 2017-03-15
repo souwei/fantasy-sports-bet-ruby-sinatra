@@ -34,8 +34,34 @@ get '/bets' do
   erb :account
 end
 
+
+post '/bets' do
+ bet = Bet.new
+binding.pry
+ bet.user_id = current_user.id
+ bet.game_type = "Head to Head"
+ bet.game_id = params[:game_id]
+ game_bet = Game.all.find_by(id:params[:game_id])
+ bet.picked_team = params[:picked_team]
+ picked_team = params[:picked_team]
+
+ if picked_team == game_bet.away_team
+  bet.pay_rate = game_bet.away_odds
+ else
+  bet.pay_rate = game_bet.home_odds
+ end
+
+ bet.amount = params[:stake_amount].to_d.round(2)
+ bet.save
+ redirect '/games'
+end
+
 get '/games' do
   erb  :games
+end
+
+get '/games/:id' do
+  erb :newbet
 end
 
 post '/session' do
