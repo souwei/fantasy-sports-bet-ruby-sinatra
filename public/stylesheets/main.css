@@ -1,8 +1,10 @@
+body{
+  background-color: #EFEFEF;
+}
 
-/*.games_item_heading{
-  width:100%;
-}*/
-
+.row{
+  background-color: white;
+}
 .game_item{
   width:70%;
   border:1px solid black;
@@ -14,4 +16,23 @@
 
 .game_item_odds{
   width:15%;
+}
+
+.button_edit_page{
+  margin-left:30px;
+}
+
+div.marquee {
+    white-space:no-wrap;
+    overflow:hidden;
+}
+div.marquee > div.marquee-text {
+    white-space:nowrap;
+    display:inline;
+    width:auto;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #EF92A5;
+  text-decoration: none;
 }

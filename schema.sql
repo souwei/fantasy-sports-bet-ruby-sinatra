@@ -30,7 +30,8 @@ CREATE TABLE bets(
 	type VARCHAR(350),
 	game_id INTEGER,
 	pay_rate DECIMAL(5,2),
-	amount NUMERIC(15,2)
+	amount NUMERIC(15,2),
+	picked_team VARCHAR(500)
 );
 
 CREATE TABLE bet_outcomes(

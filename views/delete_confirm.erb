@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-12" style="border:1px solid black;">
+    <div class="alert alert-warning" role="alert">
+      <h1 class="alert-heading"><strong>BET REMOVAL CONFIRMATION</strong></h1>
+      <h4 class="alert-heading">Are you sure you want to delete this bet?</h4>
+      <form action="/bets/<%= params[:id]%>/delete" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class='button_edit_page btn btn-danger' style="margin-bottom:10px;">Yes, I Would like to Remove this Bet</button>
+      </form>
+
+      <a href="/bets" class='button_edit_page btn btn-success'>No, I Would like to Keep this Bet</a>
+
+    </div>
+  </div>
+</div>

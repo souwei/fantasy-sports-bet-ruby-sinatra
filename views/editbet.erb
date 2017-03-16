@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-md-12">
+    <form class = "form-horizontal" role = "form" method="post">
+      <h1>Bet Slip</h1>
+      <div class = "form-group">
+        <label for = "firstname" class = "col-sm-2 control-label">Bet ID</label>
+        <div class = "col-sm-6">
+           <input type = "text" class = "form-control" readonly="readonly" value="BET  <%= params[:id]%>">
+        </div>
+      </div>
+
+      <div class = "form-group">
+        <label for = "firstname" class = "col-sm-2 control-label">Game</label>
+        <div class = "col-sm-6">
+           <input type = "text" class = "form-control" readonly="readonly" value="<%= Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).description %>">
+        </div>
+      </div>
+
+     <div class = "form-group">
+        <label for = "lastname" class = "col-sm-2 control-label">Customer ID</label>
+        <div class = "col-sm-4">
+          <input type = "text" class = "form-control" readonly="readonly" value="FANTASYBET_USER<%= current_user.id%>">
+        </div>
+     </div>
+
+     <div class = "form-group">
+       <label for = "lastname" class = "col-sm-2 control-label">Customer Email</label>
+       <div class = "col-sm-4">
+         <input type = "text" class = "form-control" readonly="readonly" value="<%= current_user.email_address%>">
+       </div>
+     </div>
+
+     <div class = "form-group">
+       <label for = "picked_team" class = "col-sm-2 control-label">Your Choice of Team FTW!</label>
+       <div class = "col-sm-6">
+         <select name="picked_team" class="custom-select col-sm-6" style="padding:10px;">
+           <% if Bet.find_by(id:params[:id]).picked_team == Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).home_team %>
+           <option selected value="<%=Bet.find_by(id:params[:id]).picked_team%>"><%=Bet.find_by(id:params[:id]).picked_team %></option>
+           <option value="<%=Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).away_team%>"><%=Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).away_team%></option>
+           <% else %>
+           <option selected value="<%=Bet.find_by(id:params[:id]).picked_team%>"><%=Bet.find_by(id:params[:id]).picked_team %></option>
+           <option value="<%=Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).home_team%>"><%=Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).home_team%></option>
+           <% end %>
+         </select>
+       </div>
+     </div>
+
+     <div class = "form-group">
+       <label for = "win_odds" class = "col-sm-2 control-label">Win Odds</label>
+       <div class = "col-sm-2">
+         <% if Bet.find_by(id:params[:id]).picked_team == Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).home_team %>
+         <input class="odds_display form-control" type="text" readonly="readonly" value="<%=Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).home_odds %>">
+         <% else %>
+         <input class="odds_display form-control" type="text" readonly="readonly" value="<%=Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).away_odds %>">
+         <% end %>
+       </div>
+     </div>
+
+     <div class = "form-group">
+       <label for = "stake_amount" class = "col-sm-2 control-label">Your Stake</label>
+       <div class = "col-sm-4">
+         <div class="input-group">
+           <span class="input-group-addon">$</span>
+           <input name="stake_amount" type = "number" step="0.01" class = "stake_area form-control"  placeholder="AUD Dollar" value="<%=sprintf "%.2f",Bet.find_by(id:params[:id]).amount %>">
+         </div>
+       </div>
+     </div>
+      <br>
+
+      <div class="form-group">
+          <input type="submit" value="CONFIRM CHANGES" class='button_edit_page btn btn-primary btn btn-info'>
+          <input type="hidden" name="_method" value="put">
+          <input type="hidden" name="bet_id" value="<%= params[:id] %>">
+          <a href="/bets" class='button_edit_page btn btn-default button_edit_page'>Return to Account</a>
+          <a href="/bets/<%=params[:id]%>/delete" class='button_edit_page btn btn-danger'>CANCEL THIS BET</a>
+      </div>
+      
+  </div>
+</form>
+</div>
+
+<script>
+var homeTeam = {
+  team: "<%= Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).home_team %>",
+  odds: "<%= Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).home_odds %>"
+};
+
+var awayTeam = {
+  team: "<%= Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).away_team %>",
+  odds: "<%= Game.all.find_by(id:Bet.find_by(id:params[:id]).game_id).away_odds %>"
+}
+
+$( ".custom-select" ).change(function() {
+  var x = $( ".custom-select" )[0].value;
+  if(x===homeTeam.team){
+    $ ( ".odds_display" )[0].value = homeTeam.odds;
+  }else{
+    $ ( ".odds_display" )[0].value = awayTeam.odds;
+  }
+});
+
+
+
+</script>
