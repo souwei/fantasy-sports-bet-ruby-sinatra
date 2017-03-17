@@ -5,7 +5,7 @@ but recently i found a very similar concept in NBA2k17 videogame published by 2k
 <a href="https://ibb.co/kp0NFa"><img src="https://image.ibb.co/hFg7gF/2353882_0001.jpg" alt="2353882_0001" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>Football Manager</a><br />
 So i thought of combining ideas from both games and add a virtual bet twist to it.
 
-## Plan and Approach 
+## Plan and Approach
 #### Overview
 - I started by thinking what the main "feature" or selling point of my web application which was to allow users to bet on "real" sportsevent with real odds with virtual currency. With the collected virtual currency, users will then be able to purchase "players" from the app and build their own teams and pit their teams against other players.
 - I understood that my final product for this project would not be completed in time , therefore i tried to break down
@@ -93,3 +93,6 @@ online and available for end users.
 - Create "Teams" class which will have "Real Teams" and "Fantasy Teams"
 - Create "Players" class which will have active players in the league and retired players that will contain attributes and statlines
 - Add simulating feature which will simulate matches at a set interval where "users" can bet on games where simulation has not run yet.
+
+### Project Live Link
+https://thawing-crag-52192.herokuapp.com/
